@@ -1,75 +1,87 @@
 #include<iostream>
 using namespace std;
-#define MAX 100
 
-int dataArr[MAX];
-int nextArr[MAX];
-int head = -1;
-int freeIndex = 0;
+struct Node{
+    int data;
+    Node* next;
+};
 
-//insert a node at end
-void insertion(int value){
-    dataArr[freeIndex] = value;
-    nextArr[freeIndex] = -1;
+class LinkedList{
+    Node* head;
+    public:
+      LinkedList(){
+        head = nullptr;
+    }
 
-    if(head == -1){
-        head = freeIndex;
-    }else{
-        int temp = head;
-        while(nextArr[temp] != -1){
-            temp = nextArr[temp];
+    void insert(int value){
+        Node* newNode = new Node();
+        newNode -> data = value;
+        newNode -> next = nullptr;
+        if(head == nullptr){
+            head = newNode;
+        }else{
+            Node* temp = head;
+            while(temp->next!=nullptr){
+                temp = temp -> next;
+            }
+            temp -> next = newNode;
         }
-        nextArr[temp] = freeIndex;
-    }
-    cout<<value<<" Inserted\n";
-    freeIndex++;
-}
-//delete node from end
-void deleteEnd(){
-    if(head == -1){
-        cout<<"List is empty nothing to display";
-        return;
-    }
-    if(nextArr[head] == -1){
-        cout<<dataArr[head]<<" deleted";
-        head = -1;
-        return;
-    }
-    int temp = head;
-    int prev = -1;
-    while(nextArr[temp] != -1){
-        prev = temp;
-        temp = nextArr[temp];
-    }
-    cout<<dataArr[temp]<<" deleted\n";
-    nextArr[prev] = -1;
-}
-
-void display(){
-    if(head == -1){
-        cout<<"List is empty";
-        return;
+        cout<<value<<" Inserted "<<endl;
     }
 
-    cout<<"Linked list: ";
-    int temp = head;
-    while(temp!= -1){
-        cout<<dataArr[temp]<<" ";
-        temp = nextArr[temp];
+    void deleteNode(){
+        if(head == nullptr){
+            cout<<"List is empty";
+            return;
+        }
+        Node* temp = head;
+        cout<<head->data<<" deleted";
+        head = head-> next;
+        delete temp;
     }
-    cout<<"\n";
-}
+
+    void display(){
+        if(head == nullptr){
+            cout<<"List is empty";
+            return;
+        }
+        cout<<"Linked list: "<<endl;
+        Node* temp = head;
+        while(temp!=nullptr){
+            cout<<temp->data<<" ";
+            temp = temp -> next;
+        }
+        cout<<endl;
+    }
+};
+
 int main(){
-    insertion(10);
-    insertion(20);
-    insertion(30);  
-    insertion(40);  
-    insertion(50);  
-
-    display();
-
-    deleteEnd();
-    deleteEnd();
-
-    display();
+    LinkedList list;
+    int choice,value;
+    while(true)
+    {
+        cout << "\nEnter your choice";
+        cout << "\n1:insert\n1:delete\n3:Display\n4:Exit\n";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout<<"Enter value to insert: ";
+            cin>>value;
+            list.insert(value);
+            break;
+        case 2:
+            list.deleteNode();
+            break;
+        case 3:
+            list.display();
+            break;
+        case 4:
+            cout<<"Exitting...\n";
+            exit(0);
+            break;
+        default:
+            cout<<"Invalid Choice...";
+        }
+    }
 }

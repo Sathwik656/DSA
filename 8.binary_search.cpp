@@ -6,7 +6,12 @@ int main(){
     int n = 6;
     int key;
 
-    cout<<"Enter the element to search: ";
+    cout<<"Array elements: ";
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+
+    cout<<"\nEnter the element to search: ";
     cin>>key;
 
     int low=0,high = n -1;

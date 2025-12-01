@@ -6,7 +6,7 @@ int arr[SIZE];
 int top = -1;
 
 void push(int value){
-    arr[top++] = value;
+    arr[++top] = value;
 }
 
 int pop(){
@@ -20,8 +20,8 @@ int evaluatePrefix(string exp){
         if(ch >= '0' && ch<= '9'){
             push(ch - '0');
         }else{
-            int val1 = pop();
             int val2 = pop();
+            int val1 = pop();
 
             switch (ch)
             {
@@ -29,6 +29,7 @@ int evaluatePrefix(string exp){
             case '-':push(val1-val2);break;
             case '*':push(val1*val2);break;
             case '/':push(val1/val2);break;
+            case '^':push(val1^val2); break;
             }
         }
     }

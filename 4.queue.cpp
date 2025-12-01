@@ -3,46 +3,72 @@ using namespace std;
 
 #define MAX 5
 
-int queuearr[MAX];
-int rear = -1;
+class Queue{
+    int queuearr[MAX];
+    int front,rear;
 
-void enqueue(int value){
-    if(rear==MAX-1){
-        cout<<"Queue overflw cannot insert"<<value<<endl;
-    }else{
-        queuearr[++rear]=value;
-        cout<<value<<" Enqueued into queue"<<endl;
+    public:
+        Queue(){
+            front=-1;
+            rear=-1;
+        }
+    void enqueue(int value){
+        if(rear==MAX-1){
+          cout<<"Queue overflw cannot insert"<<value<<endl;
+        }else{
+            if(front==-1)front=0;
+            queuearr[++rear]=value;
+            cout<<value<<" Enqueued into queue"<<endl;
+        }
     }
-}
-void dequeue(){
-    if(rear==-1){
+    void dequeue(){
+    if(front==-1 || rear ==-1){
         cout<<"Queue underflow"<<endl;
     }else{
-        cout<<queuearr[0]<<" Dequeued from queue"<<endl;
-        for(int i=0;i<rear;i++){
-            queuearr[i]=queuearr[i+1];
-        }
-        rear--;
+        cout<<queuearr[front]<<" Removed from queue"<<endl;
+        front++;
     }
-}
-void display(){
-    if(rear==-1){
-        cout<<"Queue is empty"<<endl;
-    }else{
-        cout<<"Queue elements ";
-        for(int i=0;i<=rear;i++){
-            cout<<queuearr[i]<<" ";
-        }
-        cout<<endl;
     }
-}
+
+    void display(){
+        if(front==-1 || rear==-1){
+            cout<<"Queue is empty"<<endl;
+        }else{
+            cout<<"Queue elements ";
+            for(int i=front;i<=rear;i++){
+                cout<<queuearr[i]<<" ";
+            }
+            cout<<endl;
+        }
+    } 
+};
+
 int main(){
-    enqueue(10);
-    enqueue(20);
-    enqueue(30);
-    enqueue(40);
-    display();
-    dequeue();
-    dequeue();
-    display();
+    Queue q;
+    int choice,value;
+    do
+    {
+        cout << "\nEnter your choice";
+        cout << "\n1:Enqueue\n1:Dequeue\n3:Display\n4:Exit\n";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout<<"Enter value to insert: ";
+            cin>>value;
+            q.enqueue(value);
+            break;
+        case 2:
+            q.dequeue();
+            break;
+        case 3:
+            q.display();
+            break;
+        case 4:
+            cout<<"Exitting...\n";
+            break;
+        default:
+            cout<<"Invalid Choice...";
+        }
+    }while(choice!=4);
 }

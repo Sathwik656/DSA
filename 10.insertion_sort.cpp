@@ -2,15 +2,16 @@
 using namespace std;
 
 int main(){
-    int arr[5] = {12, 11, 13, 5, 6};
-    int n = 5;
+    int n;
+    cout<<"Enter no of elments: ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter "<<n<<" Elements: ";
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
 
-    cout<<"Original array: ";
-    for(int i=0;i<n;i++)
-        cout<<arr[i]<<" ";
-    cout<<endl;
-
-    //insertion sort
+    
     for(int i=1; i<n; i++){
         int key = arr[i];
         int j = i - 1;

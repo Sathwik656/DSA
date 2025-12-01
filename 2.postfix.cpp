@@ -1,4 +1,6 @@
 #include<iostream>
+#include<cctype>
+#include<cmath>
 using namespace std;
 
 #define SIZE 20
@@ -29,6 +31,7 @@ int evaluatePostfix(string exp) {
                 case '-': push(val1 - val2); break;
                 case '*': push(val1 * val2); break;
                 case '/': push(val1 / val2); break;
+                case '^': push(pow(val1,val2)); break;
             }
         }
     }
